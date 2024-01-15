@@ -19,6 +19,12 @@ export default defineConfig({
     },
     react(),
   ],
+  css: {
+    modules: {
+      localsConvention: "camelCase",
+      generateScopeName: "[local]__[hash:base64:5]",
+    },
+  },
   optimizeDeps: {
     force: true,
     esbuildOptions: {

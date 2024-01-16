@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import classes from "./UserCard.module.css";
 import cx from "classnames";
 import PropTypes from "prop-types";

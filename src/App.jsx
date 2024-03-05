@@ -1,28 +1,26 @@
-import { use } from 'chai'
 import AuthProvider from './providers/AuthProvider'
 import Routes from './routes'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
-const POSTS = [
-  { id: 1, title: 'Post 1' },
-  { id: 2, title: 'Post 2' },
-]
+const retrievePosts = async () => {
+  const response = await fetch('http://localhost:8000/posts')
+  const data = await response.json()
+  return data
+}
 
 export default function App() {
-  const postsQuery = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ['posts'],
-    queryFn: () => wait(1000).then(() => [...POSTS]),
+    queryFn: retrievePosts,
   })
 
   return (
-    // <AuthProvider>
-    //   <Routes />
-    // </AuthProvider>
-    <div>
-      {postsQuery.data.map((post) => (
-        <div key={post.id}>{post.title}</div>
-      ))}
-    </div>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+    // <div>
+    //   {data && data.map((post) => <div key={post.id}>{post.title}</div>)}
+    // </div>
   )
 }
 

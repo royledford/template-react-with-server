@@ -1,4 +1,4 @@
-export default function checkAuth() {
+export function checkAuth() {
   // return new Promise((resolve, reject) => {
   const token = getToken()
   if (token) {

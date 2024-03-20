@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState, useEffect } from 'react'
+import { redirect } from 'react-router-dom'
 
 const AuthContext = createContext()
 
@@ -21,9 +22,9 @@ const AuthProvider = ({ children }) => {
     () => ({
       token,
       setToken,
-      removeToken
+      removeToken,
     }),
-    [token]
+    [token],
   )
 
   // Manage token changes

@@ -11,51 +11,70 @@ const Routes = () => {
   const routesForPublic = [
     {
       path: '/service',
-      element: <div>Service Page</div>
+      element: <div>Service Page</div>,
     },
     {
       path: '/about-us',
-      element: <div>About Us</div>
-    }
+      element: <div>About Us</div>,
+    },
   ]
 
-  const routesForAuthenticatedOnly = [
-    {
-      path: '/',
-      element: <ProtectedRoute />,
-      children: [
-        {
-          path: '/',
-          element: <Home />
-        },
-        {
-          path: '/profile',
-          element: <div>User Profile</div>
-        },
-        {
-          path: '/logout',
-          element: <Login />
-        }
-      ]
-    }
-  ]
+  // const routesForAuthenticatedOnly = [
+  //   {
+  //     path: '/',
+  //     element: <ProtectedRoute />,
+  //     children: [
+  //       {
+  //         path: '/',
+  //         element: <Home />,
+  //       },
+  //       {
+  //         path: '/profile',
+  //         element: <div>User Profile</div>,
+  //       },
+  //       {
+  //         path: '/logout',
+  //         element: <Login />,
+  //       },
+  //     ],
+  //   },
+  // ]
 
-  const routesForNotAuthenticatedOnly = [
+  const publicRoutes = [
     {
       path: '/',
-      element: <Home />
+      element: <Home />,
     },
     {
       path: '/login',
-      element: <Login />
-    }
+      element: <Login />,
+    },
   ]
 
-  const router = createBrowserRouter([
-    ...routesForPublic,
-    ...(!token ? routesForNotAuthenticatedOnly : []),
-    ...routesForAuthenticatedOnly
-  ])
+  const authenticated = [
+    {
+      path: '/app',
+      element: <Home />,
+      children: [
+        {
+          path: 'home',
+          element: <Home />,
+        },
+        {
+          path: 'profile',
+          element: <Login />,
+        },
+      ],
+    },
+    {
+      path: '/profile',
+      element: <Login />,
+    },
+  ]
+
+  const routes = [...publicRoutes, ...authenticated]
+
+  const router = createBrowserRouter(routes)
 
   return <RouterProvider router={router} />
 }
